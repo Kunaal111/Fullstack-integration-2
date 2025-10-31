@@ -1,0 +1,62 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cart/cartSlice';
+
+const ProductList = () => {
+  const dispatch = useDispatch();
+
+  const products = [
+    { id: 1, name: 'Laptop', price: 75000 },
+    { id: 2, name: 'Smartphone', price: 30000 },
+    { id: 3, name: 'Headphones', price: 2000 },
+    { id: 4, name: 'Smartwatch', price: 5000 },
+  ];
+
+  return (
+    <div style={styles.container}>
+      <h2 style={styles.title}>🛍️ Product List</h2>
+      <div style={styles.grid}>
+        {products.map((product) => (
+          <div key={product.id} style={styles.card}>
+            <h3>{product.name}</h3>
+            <p>₹{product.price}</p>
+            <button
+              onClick={() => dispatch(addToCart(product))}
+              style={styles.button}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  container: { textAlign: 'center', padding: '20px' },
+  title: { color: '#007bff', marginBottom: '20px' },
+  grid: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    gap: '20px',
+  },
+  card: {
+    background: '#fff',
+    padding: '20px',
+    width: '200px',
+    borderRadius: '10px',
+    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    padding: '8px 12px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  },
+};
+
+export default ProductList;
